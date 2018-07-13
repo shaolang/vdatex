@@ -1,4 +1,4 @@
-defmodule VDatex.CurrencyDateDate do
+defmodule VDatex.CurrencyDateTest do
   use ExUnit.Case
   use ExUnitProperties
   alias StreamData, as: SD
