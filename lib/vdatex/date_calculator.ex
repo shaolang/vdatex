@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-defmodule VDatex.CurrencyDate do
+defmodule VDatex.DateCalculator do
   alias __MODULE__
 
   defstruct [:weekends]
 
-  def new(weekends \\ [6, 7]), do: %CurrencyDate{weekends: weekends}
+  def new(weekends \\ [6, 7]), do: %DateCalculator{weekends: weekends}
 
   def next_biz_day(
-        %CurrencyDate{weekends: weekends} = vdate,
+        %DateCalculator{weekends: weekends} = vdate,
         curr_date,
         holidays \\ []
       ) do

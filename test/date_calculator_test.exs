@@ -16,31 +16,31 @@ defmodule VDatex.CurrencyDateTest do
   use ExUnit.Case
   use ExUnitProperties
   alias StreamData, as: SD
-  alias VDatex.CurrencyDate
+  alias VDatex.DateCalculator, as: DCal
 
   property "next_biz_day/2 is always one day after (assuming no weekends and holidays)" do
     check all curr_date <- gen_date() do
-      cd = CurrencyDate.new([])
+      dc = DCal.new([])
 
-      assert Date.diff(CurrencyDate.next_biz_day(cd, curr_date), curr_date) == 1
+      assert Date.diff(DCal.next_biz_day(dc, curr_date), curr_date) == 1
     end
   end
 
   property "next_biz_day/2 never falls on weekends" do
     check all weekends <- gen_weekends(),
               curr_date <- gen_date() do
-      cd = CurrencyDate.new(weekends)
+      dc = DCal.new(weekends)
 
-      refute Date.day_of_week(CurrencyDate.next_biz_day(cd, curr_date)) in weekends
+      refute Date.day_of_week(DCal.next_biz_day(dc, curr_date)) in weekends
     end
   end
 
   property "next_biz_day/2 never falls on holidays" do
     check all curr_date <- gen_date(),
               holidays <- gen_holidays(curr_date) do
-      cd = CurrencyDate.new()
+      dc = DCal.new()
 
-      refute CurrencyDate.next_biz_day(cd, curr_date, holidays) in holidays
+      refute DCal.next_biz_day(dc, curr_date, holidays) in holidays
     end
   end
 
