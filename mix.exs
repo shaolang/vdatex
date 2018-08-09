@@ -14,6 +14,7 @@ defmodule VDatex.MixProject do
       ],
       descriptions: "FX value date calculation",
       deps: deps(),
+      elixirc_paths: elixirc_paths(Mix.env()),
       name: "VDatex",
       source_url: "https://github.com/shaolang/vdatex"
     ]
@@ -32,4 +33,7 @@ defmodule VDatex.MixProject do
       {:stream_data, "~> 0.4.2", only: :test}
     ]
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test"]
+  defp elixirc_paths(_),     do: ["lib"]
 end

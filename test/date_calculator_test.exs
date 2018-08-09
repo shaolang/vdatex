@@ -13,9 +13,7 @@
 # limitations under the License.
 
 defmodule VDatex.CurrencyDateTest do
-  use ExUnit.Case
-  use ExUnitProperties
-  alias StreamData, as: SD
+  use VDatexCase
   alias VDatex.DateCalculator, as: DCal
 
   property "next_biz_day/2 is always one day after (assuming no weekends and holidays)" do
@@ -42,19 +40,5 @@ defmodule VDatex.CurrencyDateTest do
 
       refute DCal.next_biz_day(dc, curr_date, holidays) in holidays
     end
-  end
-
-  defp gen_date(),
-    do: SD.map(SD.positive_integer(), fn n -> Date.add(~D[2018-01-01], n) end)
-
-  defp gen_weekends(),
-    do: SD.map(SD.integer(1..6), fn n -> [n, n + 1] end)
-
-  defp gen_holidays(curr_date) do
-    SD.positive_integer()
-    |> SD.list_of(min_length: 1)
-    |> SD.map(fn ns ->
-      Enum.map(MapSet.new(ns), fn n -> Date.add(curr_date, n) end)
-    end)
   end
 end

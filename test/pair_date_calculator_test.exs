@@ -13,10 +13,8 @@
 # limitations under the License.
 
 defmodule VDatex.PairDateCalculatorTest do
-  use ExUnit.Case
-  use ExUnitProperties
+  use VDatexCase
   alias VDatex.PairDateCalculator
-  alias VDatex.DateCalculator
 
   property "value spot does not fall on weekends" do
     check all %{weekends: we1} = dc1 <- gen_date_calculator(),
@@ -27,15 +25,5 @@ defmodule VDatex.PairDateCalculatorTest do
 
       refute PairDateCalculator.value(pdc, :spot, curr_date) in all_weekends
     end
-  end
-
-  def gen_date_calculator() do
-    StreamData.integer(1..6)
-    |> StreamData.map(fn n -> DateCalculator.new([n, n+1]) end)
-  end
-
-  def gen_date() do
-    StreamData.positive_integer
-    |> StreamData.map(fn n -> Date.add(~D[2018-01-01], n) end)
   end
 end
