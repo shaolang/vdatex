@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-defmodule VDatex.CurrencyDateTest do
+defmodule VDatex.DateCalculatorTest do
   use VDatexCase
   alias VDatex.DateCalculator, as: DCal
 
