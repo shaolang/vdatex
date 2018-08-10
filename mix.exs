@@ -29,7 +29,7 @@ defmodule VDatex.MixProject do
 
   defp deps do
     [
-      {:mix_test_watch, "~> 0.6", only: :dev, runtime: false},
+      {:mix_test_watch, "~> 0.8", only: :dev, runtime: false},
       {:stream_data, "~> 0.4.2", only: :test}
     ]
   end
